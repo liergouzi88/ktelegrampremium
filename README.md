@@ -1,7 +1,8 @@
 ## Tbo修改版
 基于[U2FsdGVkX1/Tbo](https://github.com/U2FsdGVkX1/Tbo)修改!
-### 简单安装 php 需要拓展 Memcache缓存
+### 简单安装 php 需要拓展 memcached 缓存
 ### 搭建号建立监控即可 usdt 收款 后台可以设置 客服
+### 登录后台设置密钥 设置主人id 有订单 也会通知 主人id
 
 
 
@@ -26,7 +27,7 @@ PS：[真正的粉丝群](https://telegram.me/TboJiangGroup)
 
 PSS：[开发文档](https://github.com/U2FsdGVkX1/Tbo/wiki)
 
-AD：[作者自己的 channel（与 Tbo 无关）](https://t.me/u2fplus1s)
+AD：[作者自己的 channel（与 Tbo 无关）](https://t.me/xiaotouadmin)
 
 ---
 
