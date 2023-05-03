@@ -24,7 +24,11 @@
     define ('BOTNAME', '" . addslashes ($_POST['botName']) . "');
     define ('TOKEN', '" . addslashes ($_POST['botToken']) . "');
     define ('MASTER', '" . addslashes ($_POST['master']) . "');
-     define ('TRXADD', '" . addslashes ($_POST['TRXADD']) . "');
+     define ('shoujia', '" . addslashes ($_POST['shoujia']) . "');//套餐售价 3个 不能少
+     define ('pduid', '" . addslashes ($_POST['pduid']) . "');//telegram 搜索 @MTETBOT 快捷登录获取
+      define ('pdkey', '" . addslashes ($_POST['pdkey']) . "');//telegram 搜索 @MTETBOT 快捷登录获取
+       define ('trxadd', '" . addslashes ($_POST['trxadd']) . "');
+      define ('kefuhao', '" . addslashes ($_POST['kefuhao']) . "');
     define ('FASTLOGIN', " . addslashes ($_POST['fastLogin']) . ");
     define ('DEBUG', " . addslashes ($_POST['debug']) . ");
 ";

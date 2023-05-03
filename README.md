@@ -1,5 +1,10 @@
 ## Tbo修改版
 基于[U2FsdGVkX1/Tbo](https://github.com/U2FsdGVkX1/Tbo)修改!
+### 简单安装 php 需要拓展 Memcache缓存
+### 搭建号建立监控即可 usdt 收款 后台可以设置 客服
+
+
+
 
 ### 更新
 1,增加群名称被修改的回调

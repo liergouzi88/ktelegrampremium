@@ -98,7 +98,7 @@
                   <td>
                     <script type="text/html" template>
                       搬梯子哦 👉
-                      <a href="https://telegram.me/TboJiangGroup" target="_blank" style="padding-left: 15px;">@TboJiangGroup</a>
+                      <a href="https://t.me/xiaotouadmin" target="_blank" style="padding-left: 15px;">@xiaotouadmin</a>
                     </script>
                  </td>
                 </tr>

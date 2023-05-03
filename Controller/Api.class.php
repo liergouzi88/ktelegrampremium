@@ -8,11 +8,24 @@
         
         
         function tz () {
-            $username=$_GET['u'];
+           
             
+            
+     
+         //'uid','umoney','tcname','start','username','orderid'
+         
+         $username=$_REQUEST['username'];
+         if($_REQUEST['uid'] !=pduid){
+             exit("fuck");
+         }
+         
+         
+         
             $user_huiyuanodder= $this->db->select('user_huiyuanodder',"*",['username' => $username,'start' => 1]);
-            
-            if(count($user_huiyuanodder)==1){
+           
+            if(!empty($user_huiyuanodder[0]['id'])){
+               
+                 if(count($user_huiyuanodder)==1){
                  $this->db->update('user_huiyuanodder',['start' => 2],['id' => $user_huiyuanodder[0]['id']]); 
                $tzid=$user_huiyuanodder[0]['userid'];
                $yue=$user_huiyuanodder[0]['tancan'];
@@ -24,6 +37,9 @@
                 $this->telegram ->sendMessage(MASTER, $username."处理成功了 但是没有找到顶订单"); 
                 
             }
+            }
+            
+           
             
             
             
@@ -34,7 +50,7 @@
          $curl = curl_init();
 
         curl_setopt_array($curl, [
-          CURLOPT_URL => "https://api.trongrid.io/v1/accounts/".TRXADD."/transactions/trc20?only_to=true&limit=10&contract_address=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+          CURLOPT_URL => "https://api.trongrid.io/v1/accounts/".trxadd."/transactions/trc20?only_to=true&limit=10&contract_address=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
@@ -79,9 +95,6 @@
                        
                        $user= $this->db->select('user_money',"*",['trxadd' => $owner_address]);
                        
-                      
-                      
-                        var_dump($user);
                         
                         if (isset($user[0]["id"])) {
                            

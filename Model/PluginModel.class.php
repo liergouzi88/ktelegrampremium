@@ -149,6 +149,14 @@
             /** 返回 */
             return $ret;
         }
+        function getoddr(){
+            $ret = $this->db->select ('user_huiyuanodder', '*', []); 
+             return $ret;
+        }
+        
+        
+        
+        
         function scan ()
         {
             $pluginList = scandir (APP_PATH . '/Plugins');

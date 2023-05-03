@@ -1,6 +1,7 @@
 <?php
-    define ('DBHOST', '127.0.0.1');
-    define ('DBNAME', '您的数据库名称');
-    define ('DBUSER', '您的数据库用户名');
-    define ('DBPASS', '数据库密码');
-    define ('DBPERSISTENT', false);
+/*数据库配置*/
+  define ('DBHOST', 'localhost');
+    define ('DBNAME', 'k_et15_com');
+    define ('DBUSER', 'k_et15_com');
+    define ('DBPASS', 'yzRSDPKcaxX3Cp2M');
+    define ('DBPERSISTENT', false);;

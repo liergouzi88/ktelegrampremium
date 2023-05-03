@@ -28,13 +28,41 @@
                 </div>
                 <div class="layui-form-mid layui-word-aux">可通过启用 Whoami 插件之后向机器人发送 /whoami 获取</div>
               </div>
+               <div class="layui-form-item">
+                <label class="layui-form-label">套餐售价</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="shoujia" class="layui-input" placeholder="15,25,35" value="<?php echo shoujia ?>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">分别为 3 6 12 月售价</div>
+              </div>
+                 <div class="layui-form-item">
+                <label class="layui-form-label">收款USDT(trx)</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="trxadd" class="layui-input" placeholder="收款USDT(trx)" value="<?php echo trxadd ?>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">你的收款地址</div>
+              </div>
+                 <div class="layui-form-item">
+                <label class="layui-form-label">客服飞机号</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="kefuhao" class="layui-input" placeholder="主人ID" value="<?php echo kefuhao ?>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">@ 开头的 飞机号</div>
+              </div>
               
                <div class="layui-form-item">
-                <label class="layui-form-label">TRX ADD</label>
+                <label class="layui-form-label">抛单uid</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="TRXADD" class="layui-input" placeholder="主人ID" value="<?php echo TRXADD ?>">
+                  <input type="text" name="pduid" class="layui-input" placeholder="抛单uid(telegram 搜索 @MTETBOT 快捷登录获取)" value="<?php echo pduid ?>">
                 </div>
-                <div class="layui-form-mid layui-word-aux">可通过启用 Whoami 插件之后向机器人发送 /whoami 获取</div>
+                <div class="layui-form-mid layui-word-aux">telegram 搜索 @MTETBOT 快捷登录获取</div>
+              </div>
+               <div class="layui-form-item">
+                <label class="layui-form-label">抛单key</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="pdkey" class="layui-input" placeholder="抛单key(telegram 搜索 @MTETBOT 快捷登录获取)" value="<?php echo pdkey ?>">
+                </div>
+                <div class="layui-form-mid layui-word-aux">telegram 搜索 @MTETBOT 快捷登录获取</div>
               </div>
               
               

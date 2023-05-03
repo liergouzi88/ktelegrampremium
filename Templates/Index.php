@@ -57,10 +57,22 @@
                 <cite>插件列表</cite>
               </a>
             </li>
+             <li data-name="PluginList" class="layui-nav-item">
+              <a href="javascript:;" lay-href="index.php/ordder" lay-tips="订单状态">
+                <i class="layui-icon layui-icon-util"></i>
+                <cite>订单状态</cite>
+              </a>
+            </li>
             <li data-name="Settings" class="layui-nav-item">
               <a href="javascript:;" lay-href="index.php/Settings" lay-tips="接入设置">
                 <i class="layui-icon layui-icon-set"></i>
                 <cite>接入设置</cite>
+              </a>
+            </li>
+            <li data-name="Settings" class="layui-nav-item">
+              <a href="javascript:;" lay-href="index.php/baota" lay-tips="宝塔监控设置">
+                <i class="layui-icon layui-icon-set"></i>
+                <cite>宝塔监控设置</cite>
               </a>
             </li>
           </ul>

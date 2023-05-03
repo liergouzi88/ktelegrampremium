@@ -116,7 +116,7 @@ return true;
              }
              if($message=="联系客服"){
                  
-                  $this->telegram->sendMessage ($from['id'], '@zf789');
+                  $this->telegram->sendMessage ($from['id'], kefuhao);
 return true;
              }
              
@@ -134,7 +134,7 @@ return true;
               if($message=="充值"){
                $user=  $this->db->select ('user_money',"*",['userid' => $from['id']]);
                if(empty($user[0]['trxadd'])){
-                   $this->telegram->sendMessage ($from['id'],"请先绑定您的trc20 钱包地址 ,不会请找客服"); 
+                   $this->telegram->sendMessage ($from['id'],"请先绑定您的trc20 钱包地址 ,不会请找客服". kefuhao); 
                    return true;
                }
                
@@ -142,7 +142,7 @@ return true;
                  $smg="请使用[{$user[0]['trxadd']}] 转账
 
 充值地址USDT-TRC20（点击自动复制）：
-<code>".TRXADD."</code>
+<code>".trxadd."</code>
 
 注意事项：
  👉请使用您绑定的地址转账，其他地址将不会到账
@@ -152,9 +152,13 @@ return true;
 return true;
              }
               if($message=="绑定钱包"){
-                 $smg="请输入 绑定钱包+您的trc20地址 
-例如您的地址为 Txxxxxxxxx
-请您发送 绑定钱包Txxxxxxxxx";
+                 $smg="请先绑定您的trc20 钱包地址 ，绑定方式对机器人发送：绑定钱包+你的地址
+例如：绑定钱包Txxxxxxx
+
+就是付款地址前面加上【绑定钱包】四个字
+
+
+如实在不会可以联系客服协助绑定";
                   $this->telegram->sendMessage ($from['id'],$smg);
                     return true;
              }
@@ -187,25 +191,30 @@ return true;
              
              //联系客服
              if($message=="购买会员"){
+                 $tanc=explode(",",shoujia);
+                 $t1=$tanc[0];
+                  $t2=$tanc[1];
+                   $t3=$tanc[2];
+                 
                  	$button = json_encode(
 						array(
 							'inline_keyboard' => array(
 								array(
 									array(
-										'text' => '3 个月 售价 10U',
-										'callback_data' => 'goumaisangeyuehunyu 3 8 0' 
+										'text' => '3 个月 售价 '.$t1.'U',
+										'callback_data' => 'goumaisangeyuehunyu 3 '.$t1.' 0' 
 									)
 									
 								),array(
 									array(
-										'text' => '6 个月 售价 13U',
-										'callback_data' => 'goumaisangeyuehunyu 6 11 1' 
+										'text' => '6 个月 售价 '.$t2.'U',
+										'callback_data' => 'goumaisangeyuehunyu 6 '.$t2.' 1' 
 									)
 									
 								),array(
 									array(
-										'text' => '12 个月 售价 21U',
-										'callback_data' => 'goumaisangeyuehunyu 12 19 2' 
+										'text' => '12 个月 售价 '.$t3.'U',
+										'callback_data' => 'goumaisangeyuehunyu 12 '.$t3.' 2' 
 									)
 									
 								)
@@ -230,31 +239,83 @@ return true;
                      $yue=$arr[0];
                      $money=$arr[1];
                      $tcid=$arr[2];
-                    //调用接口 查询是否存在会员 
-                     
-                    $ym = json_decode(file_get_contents("http://api.zy5d.com/api/getInfo/?id={$message}"),true);
-                     //var_dump($ym ["response"]["User"],);
-                     if(!empty($ym ["response"]["User"])){
-                        $useinf= $ym ["response"]["User"];
-                        //var_dump($useinf);
-                        if(isset($useinf["premium"])){
-                           if($useinf["premium"]==true){
-                               $this->telegram->sendMessage ($from['id'], "不支持有会员的用户下单 请到期后在下单"); 
-                             	return true;  
-                           } 
-                        } 
-                         
+                    
+                    
                           $user=  $this->db->select ('user_money',"*",['userid' => $from['id']]);
                      $xinmoney=$user[0]['money']-$money;
                      if($xinmoney>0){
+                           $order_no = date('YmdHis') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
                          $this->db->update('user_money',['money' =>$xinmoney],['userid' => $from['id']]);
-                        $this->db->insert('user_huiyuanodder',['userid' => $from['id'],'money' =>$money,'username' =>$message,'certime' =>time(),'start' =>1,'tancan' =>$yue]);
-                   $this->telegram->sendMessage ($from['id'], "充值订单已提交，请耐心等待,本次消费{$money}U"); 
+                        $this->db->insert('user_huiyuanodder',['userid' => $from['id'],'money' =>$money,'username' =>$message,'certime' =>time(),'start' =>1,'tancan' =>$yue,'order_no' =>$order_no]);
+                 
+                
+                 if(!is_numeric(pduid)){
+                    	$button = json_encode(
+						array(
+							'inline_keyboard' => array(
+								array(
+									array(
+										'text' => '手动处理成功',
+										'callback_data' => 'shoudongchuliok ok '.$order_no
+									)
+									
+								),array(
+									array(
+										'text' => '《处理失败》',
+										'callback_data' => 'shoudongchuliok error '.$order_no
+									)
+									
+								)
+							)
+						)
+					);
+					
+                $this->telegram->sendMessage(MASTER, "有新的订单 需要你 处理哟！ 被充值用户名【".$message."】【".$yue."】", "", $button, 'Markdown', true);
+                 }else{
+                     $apiurl="https://open.et15.com/api/Daikai/submit";
+                   $sign=md5(pduid.$message.$order_no.$tcid.pdkey);
+                  $submit=array("uid"=>pduid,"username"=>$message,"orderid"=>$order_no,"taocan"=>$tcid,"sign"=>$sign,"notify_url"=>"https://".$_SERVER['SERVER_NAME']."/index.php/Api/tz");
+                    $hui = $this->posturl($apiurl,$submit);
+                    	 if($hui['code']==1){
+                       // 提交出海平台成功
+                        $this->telegram->sendMessage(MASTER, "被充值用户名【".$message."】【".$yue."】已被提交到平台处理了");
+                   }else{
+                       // 失败 需要手动处理
+                       	$button = json_encode(
+						array(
+							'inline_keyboard' => array(
+								array(
+									array(
+										'text' => '手动处理成功',
+										'callback_data' => 'shoudongchuliok ok '.$order_no
+									)
+									
+								),array(
+									array(
+										'text' => '《处理失败》',
+										'callback_data' => 'shoudongchuliok error '.$order_no
+									)
+									
+								)
+							)
+						)
+					);
+					
+                $this->telegram->sendMessage(MASTER, "有新的订单 需要你 处理哟！由于提交平台出错[".$hui['msg']."] 需要您手动处理 被充值用户名【".$message."】【".$yue."】", "", $button, 'Markdown', true);
+                   }
+                    
+                     
+                 }
+                  
+                
+                
+                
+                  $this->telegram->sendMessage ($from['id'], "充值订单已提交，请耐心等待,本次消费{$money}U"); 
                    // 他提交到 api 机器人处理订购单
                    
                    //http://154.31.25.20/api/session/bottonon/?data[peer]=@kkhuiyuanbot&data[id]=365&data[tancan]=2&data[username]=@zf789
                    
-                   file_get_contents("http://154.31.25.20/api/session/bottonon/?data[peer]=@kkhuiyuanbot&data[id]=365&data[tancan]=".$tcid."&data[username]=".$message);
+                   
                    
                     $this->MemcacheModel->del("goumaitaocan".$from['id']); 
                      }else{
@@ -263,10 +324,7 @@ return true;
                      }
                          
                          
-                     }else{
-                          $this->telegram->sendMessage ($from['id'], "请不要 提供 群或者是频道的用户名 或者是不正确的用户名"); 
-                          	return true;  
-                     }
+                    
                      
                      
                     
@@ -298,6 +356,25 @@ return true;
     public function photo ($photo, $caption, $message_id, $from, $chat, $date) {
 
     }
+      public function posturl($url, $data)
+  {
+    $data = http_build_query($data);
+    //var_dump($data);
+    $headerArray = array("Content-type:application/x-www-form-urlencoded");
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 5);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headerArray);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    // var_dump($output);
+    return json_decode($output, true);
+  }
     
     public function callback_query ($callback_data, $callback_id, $callback_from, $message_id, $from, $chat, $date) {
         
@@ -378,7 +455,52 @@ return true;
 	    	}
 	    	
 	    //oererxkkaihesoftk
+	    		if($tou=="shoudongchuliok"){
+	    	   	$start = $callbackExplode['1']; 
+	    	   	$order_no = $callbackExplode['2']; //'order_no' =>$order_no
+	    	   
+	    	   
+	    	   // 
+	    	   $user_huiyuanodder= $this->db->select('user_huiyuanodder',"*",array("order_no"=>$order_no,'start' =>1));
+	    	  
 	    	
+	    	   if(empty($user_huiyuanodder[0]['order_no'])){
+	    	      	$this->telegram->answerCallback($callback_id, "订单不存在 或者是不在相应状态", true);
+	    	      	return true;
+	    	   }else{
+	    	      if($start =="ok" ){
+	    	          //修改 状态 2 并 发送看客户信息
+	    	          
+	    	           
+	    	           
+	    	           $this->db->update('user_huiyuanodder',array('start' =>2),array("order_no"=>$order_no,'start' =>1));
+	    	           
+	    	           
+	    	          $this->telegram->sendMessage ($user_huiyuanodder[0]['userid'], "您提交的购买会员【".$user_huiyuanodder[0]['username']."】已发货 如有疑问 请联系客服");
+	    	          	$this->telegram->answerCallback($callback_id, "处理ok", true);
+	    	          		$this->telegram->deleteMessage($chat['id'], $message_id);
+	    	          	return true;
+	    	          
+	    	      }
+	    	      
+	    	      if($start =="error" ){
+	    	          //修改 状态 2 并 发送看客户信息
+	    	          $this->db->update('user_huiyuanodder',array('start' =>2),array("order_no"=>$order_no,'start' =>1));
+	    	           
+	    	          $this->telegram->sendMessage ($user_huiyuanodder[0]['userid'], "您提交的购买会员【".$user_huiyuanodder[0]['username']."】处理失败  请联系 客服退款");
+	    	          	$this->telegram->answerCallback($callback_id, "已推送  找客服退款信息", true);
+	    	          		$this->telegram->deleteMessage($chat['id'], $message_id);
+	    	          	return true;
+	    	          
+	    	      }
+	    	      
+	    	  
+	    	      	
+	    	       }
+	    	      
+	    	      
+	    	       	return true;
+	    	   }
 	    	
          }
         
