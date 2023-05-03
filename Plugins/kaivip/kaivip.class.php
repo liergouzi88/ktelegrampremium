@@ -313,7 +313,7 @@ return true;
                   $this->telegram->sendMessage ($from['id'], "充值订单已提交，请耐心等待,本次消费{$money}U"); 
                    // 他提交到 api 机器人处理订购单
                    
-                   //http://154.31.25.20/api/session/bottonon/?data[peer]=@kkhuiyuanbot&data[id]=365&data[tancan]=2&data[username]=@zf789
+                  
                    
                    
                    
