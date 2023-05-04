@@ -134,7 +134,10 @@ return true;
               if($message=="充值"){
                $user=  $this->db->select ('user_money',"*",['userid' => $from['id']]);
                if(empty($user[0]['trxadd'])){
-                   $this->telegram->sendMessage ($from['id'],"请先绑定您的trc20 钱包地址 ,不会请找客服". kefuhao); 
+                   $this->telegram->sendMessage ($from['id'],"请先绑定您的trc20 钱包地址 ，绑定方式对机器人发送：绑定钱包+你的地址
+例如：绑定钱包Txxxxxxx
+就是付款地址前面加上【绑定钱包】四个字
+如实在不会可以联系客服协助绑定". kefuhao); 
                    return true;
                }
                
