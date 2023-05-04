@@ -4,19 +4,14 @@
 ### 搭建号建立监控即可 usdt 收款 后台可以设置 客服
 ### 登录后台设置密钥 设置主人id 有订单 也会通知 主人id
 
+#如果没有拓展memcached 可能导致无法使用
+###### 根据小飞机的api 要求网站必须ssl 才能webhook
+#所以必须配置ssl
+#所以必须配置ssl
+#所以必须配置ssl
+#所以必须配置ssl
+#使用非国内服务器 不支持国内服务器 不支持国内服务器 
 
-
-
-### 更新
-1,增加群名称被修改的回调
-
-2,增加消息被回复时的回调
-
-3,插件开发支持atById(id,username)进行@
-
-4,更换为layui模板
-
-5,新增一个插件设置界面示例插件
 
 
 ## Tbo
@@ -61,11 +56,3 @@ Tbo 使用了以下开源项目，感谢它们的贡献：
 [jquery-pjax](https://github.com/defunkt/jquery-pjax)
 
 ---
-
-感谢他们建议反馈以及精神支持，使得 Tbo 更加强大（<del>更多 bug</del>）
-
-[Momiji.Jin](https://github.com/MoeLoli)
-
-[Guoguo](https://github.com/imguoguo)
-
-[myluoluo](https://github.com/myluoluo)
