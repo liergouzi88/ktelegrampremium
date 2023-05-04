@@ -53,16 +53,16 @@
                <div class="layui-form-item">
                 <label class="layui-form-label">抛单uid</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="pduid" class="layui-input" placeholder="抛单uid(telegram 搜索 @MTETBOT 快捷登录获取)" value="<?php echo pduid ?>">
+                  <input type="text" name="pduid" class="layui-input" placeholder="抛单uid(telegram 搜索 https://t.me/TMTETBOT 快捷登录获取)" value="<?php echo pduid ?>">
                 </div>
-                <div class="layui-form-mid layui-word-aux">telegram 搜索 @MTETBOT 快捷登录获取</div>
+                <div class="layui-form-mid layui-word-aux">telegram 搜索 https://t.me/TMTETBOT 快捷登录获取</div>
               </div>
                <div class="layui-form-item">
                 <label class="layui-form-label">抛单key</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="pdkey" class="layui-input" placeholder="抛单key(telegram 搜索 @MTETBOT 快捷登录获取)" value="<?php echo pdkey ?>">
+                  <input type="text" name="pdkey" class="layui-input" placeholder="抛单key(telegram 搜索 https://t.me/TMTETBOT 快捷登录获取)" value="<?php echo pdkey ?>">
                 </div>
-                <div class="layui-form-mid layui-word-aux">telegram 搜索 @MTETBOT 快捷登录获取</div>
+                <div class="layui-form-mid layui-word-aux">telegram 搜索 https://t.me/TMTETBOT 快捷登录获取</div>
               </div>
               
               
